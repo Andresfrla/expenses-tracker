@@ -1,13 +1,8 @@
 import { FlatList, Text, View } from "react-native";
+import ExpenseItem from "./ExpenseItem";
 
 function renderExpenseItem(itemData) {
-  return (
-    <View>
-      <Text>{itemData.item.description}</Text>
-      <Text>${itemData.item.amount.toFixed(2)}</Text>
-      <Text>{itemData.item.date.toLocaleDateString()}</Text>
-    </View>
-  );
+  return <ExpenseItem {...itemData.item} />;
 }
 
 function ExpensesList({ expenses }) {

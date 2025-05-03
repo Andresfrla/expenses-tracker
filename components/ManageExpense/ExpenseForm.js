@@ -1,34 +1,37 @@
-import { TextInput, View } from "react-native";
+import { StyleSheet, Text, TextInput, View } from "react-native";
 import Input from "./Input";
 
 function ExpenseForm() {
-    function amountChangeHandler() {
+  function amountChangeHandler() {}
 
-    }
+  function dateChangeHandler() {}
 
-    function dateChangeHandler() {
-
-    }
-
-    function descriptionChangeHandler() {
-
-    }
+  function descriptionChangeHandler() {}
 
   return (
-    <View>
+    <View style={styles.form}>
+      <Text style={styles.title}>Your Expense</Text>
+      <View style={styles.inputsRow}>
+        <Input
+          style={styles.rowInput}
+          label="Amount"
+          textInputConfig={{
+            keyboardType: "decimal-pad",
+            onChangeText: amountChangeHandler(),
+          }}
+        />
+        <Input
+          style={styles.rowInput}
+          label="Date"
+          textInputConfig={{
+            placeholder: "YYYY-MM-DD",
+            maxLength: 10,
+            onChangeText: dateChangeHandler(),
+          }}
+        />
+      </View>
       <Input
-        label="Amount"
-        textInputConfig={{
-          keyboardType: "decimal-pad",
-          onChangeText: amountChangeHandler(),
-        }}
-      />
-      <Input label="Date" textInputConfig={{
-        placeholder: "YYYY-MM-DD",
-        maxLength: 10,
-        onChangeText: dateChangeHandler(),
-      }} />
-      <Input label="Description" 
+        label="Description"
         textInputConfig={{
           multiline: true,
           autoCorrect: false,
@@ -40,3 +43,23 @@ function ExpenseForm() {
 }
 
 export default ExpenseForm;
+
+const styles = StyleSheet.create({
+  form: {
+    marginTop: 40,
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "white",
+    marginVertical: 24,
+    textAlign: "center"
+  },
+  inputsRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  rowInput: {
+    flex: 1,
+  },
+});

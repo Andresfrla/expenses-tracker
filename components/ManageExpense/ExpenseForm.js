@@ -1,12 +1,19 @@
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import Input from "./Input";
+import { useState } from "react";
 
 function ExpenseForm() {
-  function amountChangeHandler() {}
+  const [inputValue, setInputValue] = useState({
+    amount: "",
+    date: "",
+    description: "",
+  });
 
-  function dateChangeHandler() {}
-
-  function descriptionChangeHandler() {}
+  function inputChangeHandler(inputIdentifier, enteredAmount) {
+    setInputValue((curInputValues) => {
+      return { ...curInputValues, [inputIdentifier]: enteredAmount };
+    });
+  }
 
   return (
     <View style={styles.form}>
@@ -17,7 +24,8 @@ function ExpenseForm() {
           label="Amount"
           textInputConfig={{
             keyboardType: "decimal-pad",
-            onChangeText: amountChangeHandler(),
+            onChangeText: inputChangeHandler.bind(this, "amount"),
+            value: inputValue.amount,
           }}
         />
         <Input
@@ -26,7 +34,8 @@ function ExpenseForm() {
           textInputConfig={{
             placeholder: "YYYY-MM-DD",
             maxLength: 10,
-            onChangeText: dateChangeHandler(),
+            onChangeText: inputChangeHandler.bind(this, "date"),
+            value: inputValue.date,
           }}
         />
       </View>
@@ -35,7 +44,8 @@ function ExpenseForm() {
         textInputConfig={{
           multiline: true,
           autoCorrect: false,
-          onChangeText: descriptionChangeHandler(),
+          onChangeText: inputChangeHandler.bind(this, "description"),
+          value: inputValue.description,
         }}
       />
     </View>
@@ -53,7 +63,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "white",
     marginVertical: 24,
-    textAlign: "center"
+    textAlign: "center",
   },
   inputsRow: {
     flexDirection: "row",

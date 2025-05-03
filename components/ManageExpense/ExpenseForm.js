@@ -3,8 +3,8 @@ import Input from "./Input";
 import { useState } from "react";
 import Button from "../UI/Button";
 
-function ExpenseForm({onCancel, onSubmit, submitButtonLabel}) {
-  const [inputValue, setInputValue] = useState({
+function ExpenseForm({ onCancel, onSubmit, submitButtonLabel }) {
+  const [inputValues, setInputValue] = useState({
     amount: "",
     date: "",
     description: "",
@@ -16,8 +16,14 @@ function ExpenseForm({onCancel, onSubmit, submitButtonLabel}) {
     });
   }
 
-  function submitHandler () {
+  function submitHandler() {
+    const expenseData = {
+      amount: +inputValues.amount,
+      date: new Date(inputValues.date),
+      description: inputValues.description,
+    };
 
+    onSubmit(expenseData);
   }
 
   return (
@@ -30,7 +36,7 @@ function ExpenseForm({onCancel, onSubmit, submitButtonLabel}) {
           textInputConfig={{
             keyboardType: "decimal-pad",
             onChangeText: inputChangeHandler.bind(this, "amount"),
-            value: inputValue.amount,
+            value: inputValues.amount,
           }}
         />
         <Input
@@ -40,7 +46,7 @@ function ExpenseForm({onCancel, onSubmit, submitButtonLabel}) {
             placeholder: "YYYY-MM-DD",
             maxLength: 10,
             onChangeText: inputChangeHandler.bind(this, "date"),
-            value: inputValue.date,
+            value: inputValues.date,
           }}
         />
       </View>
@@ -50,7 +56,7 @@ function ExpenseForm({onCancel, onSubmit, submitButtonLabel}) {
           multiline: true,
           autoCorrect: false,
           onChangeText: inputChangeHandler.bind(this, "description"),
-          value: inputValue.description,
+          value: inputValues.description,
         }}
       />
       <View style={styles.buttons}>

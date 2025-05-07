@@ -34,12 +34,10 @@ function ManageExpense({ route, navigation }) {
 
   async function confirmHandler(expenseData) {
     if (isEditing) {
-      console.log("Updating:", editedExpenseId, expenseData);
       expensesCtx.updateExpense(editedExpenseId, expenseData);
       await updateExpense(editedExpenseId, expenseData);
     } else {
       const id = await storeExpense(expenseData);
-      console.log("Created new expense with id:", id);
       expensesCtx.addExpense({ ...expenseData, id: id });
     }
     navigation.goBack();

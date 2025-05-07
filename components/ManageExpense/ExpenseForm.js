@@ -30,11 +30,9 @@ function ExpenseForm({ onCancel, onSubmit, submitButtonLabel, defaultValues }) {
     });
   }
 
-  // TODO: FIX THE UPDATING DATA
-
   function submitHandler() {
-    const [year, month, day ] = inputs.date.value.split("-")
-    const date = new Date(+year, +month -1, +day)
+    const [year, month, day] = inputs.date.value.split("-");
+    const date = new Date(+year, +month - 1, +day);
 
     const expenseData = {
       amount: +inputs.amount.value,
